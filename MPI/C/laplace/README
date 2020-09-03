@@ -1,0 +1,8 @@
+***---> readme file for the laplace.c file/exercise <---***
+
+In this example the 2-D Laplace equation is solved over a
+rectangular domain using the point Jacobi iteration
+method.  The initial guess for the solution vector is
+zero.  The boundaries are held at a constant value of
+100.  To compile this problem use the following or a
+similar command depending on the system:

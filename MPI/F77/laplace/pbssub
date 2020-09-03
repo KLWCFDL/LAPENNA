@@ -1,0 +1,8 @@
+#PBS -A UT-TENN0007
+#PBS -N test
+#PBS -j oe
+#PBS -q batch
+#PBS -l walltime=1:00:00,size=8
+cd $PBS_O_WORKDIR
+aprun -n 4 ./mpi_laplace
+

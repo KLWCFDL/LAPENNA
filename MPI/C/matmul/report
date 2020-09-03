@@ -1,0 +1,280 @@
+CrayPat/X:  Version 4.4.0 Revision 2227 (xf 2119)  11/10/08 11:03:15
+
+Number of PEs (MPI ranks):      8
+
+Number of Threads per PE:       1
+
+Number of Cores per Processor:  4
+
+Execution start time:   Tue Mar 17 10:34:27 2009
+
+System type and speed:   x86_64  2300 MHz
+
+Current path to data file:
+  /lustre/scratch/std0026/LAB-EXAMPLE/C/matmul/mpi_mm+pat+26391-16296tdt.ap2  (RTS)
+
+
+
+Notes for table 1:
+
+  Table option:
+    -O profile
+  Options implied by table option:  
+    -d ti%@0.95,ti,imb_ti,imb_ti%,tr -b gr,fu,pe=HIDE
+
+  Options for related tables not shown by default:
+    -O profile_pe.th           -O callers             
+    -O profile_th_pe           -O callers+src         
+    -O profile+src             -O calltree            
+    -O load_balance            -O calltree+src        
+
+  The Total value for each of Time, Calls is the sum of the Group values.
+  The Group value for each of Time, Calls is the sum of the Function values.
+  The Function value for each of Time, Calls is the avg of the PE values.
+    (To specify different aggregations, see:  pat_help report options s1)
+
+  This table shows only lines with Time% > 0.95.
+    (To set thresholds to zero, specify:  -T)
+
+  Percentages at each level are of the Total for the program.
+    (For percentages relative to next level up, specify:
+      -s percent=r[elative])
+
+
+Table 1:  Profile by Function Group and Function
+
+ Time % |     Time |Imb. Time |   Imb. | Calls |Group
+        |          |          | Time % |       | Function
+        |          |          |        |       |  PE='HIDE'
+
+ 100.0% | 0.000455 |       -- |     -- |  49.5 |Total
+|----------------------------------------------------------
+|  77.1% | 0.000351 |       -- |     -- |  16.2 |MPI
+||---------------------------------------------------------
+||  71.2% | 0.000324 | 0.001001 |  86.3% |   6.1 |MPI_Recv
+||   5.2% | 0.000024 | 0.000086 |  89.4% |   6.1 |MPI_Send
+||=========================================================
+|  15.2% | 0.000069 |       -- |     -- |   2.0 |USER
+||---------------------------------------------------------
+||   8.8% | 0.000040 | 0.000131 |  87.6% |   1.0 |main
+||   6.4% | 0.000029 | 0.000007 |  22.2% |   1.0 |exit
+||=========================================================
+|   7.7% | 0.000035 | 0.000245 | 100.0% |  31.2 |IO
+|        |          |          |        |       | printf
+|==========================================================
+
+
+Notes for table 2:
+
+  Table option:
+    -O load_balance_m
+  Options implied by table option:  
+    -d ti%@0.95,ti,Mc,Mm,Mz -b gr,pe=[mmm]
+
+  Options for related tables not shown by default:
+    -O load_balance_sm         -O load_balance_cm     
+
+  The Total value for each data item is the sum of the Group values.
+  The Group value for each data item is the avg of the PE values.
+    (To specify different aggregations, see:  pat_help report options s1)
+
+  This table shows only lines with Time% > 0.95.
+    (To set thresholds to zero, specify:  -T)
+
+  Percentages at each level are of the Total for the program.
+    (For percentages relative to next level up, specify:
+      -s percent=r[elative])
+
+
+Table 2:  Load Balance with MPI Message Stats
+
+ Time % |     Time |   MPI | MPI Msg |Avg MPI |Group
+        |          |   Msg |   Bytes |    Msg | PE[mmm]
+        |          | Count |         |   Size |
+
+ 100.0% | 0.000484 |   6.1 |  2949.0 | 481.47 |Total
+|------------------------------------------------------
+|  74.4% | 0.000361 |   6.1 |  2949.0 | 481.47 |MPI
+||-----------------------------------------------------
+||  37.9% | 0.001469 |  28.0 | 17936.0 | 640.57 |pe.0
+||   1.3% | 0.000049 |   3.0 |   792.0 | 264.00 |pe.5
+||   0.9% | 0.000035 |   3.0 |   848.0 | 282.67 |pe.1
+||=====================================================
+|  14.5% | 0.000070 |    -- |      -- |     -- |USER
+||-----------------------------------------------------
+||   5.2% | 0.000203 |    -- |      -- |     -- |pe.0
+||   1.3% | 0.000050 |    -- |      -- |     -- |pe.7
+||   1.2% | 0.000047 |    -- |      -- |     -- |pe.2
+||=====================================================
+|  11.0% | 0.000054 |    -- |      -- |     -- |IO
+||-----------------------------------------------------
+||  11.0% | 0.000428 |    -- |      -- |     -- |pe.0
+||     -- | 0.000000 |    -- |      -- |     -- |pe.3
+||     -- | 0.000000 |    -- |      -- |     -- |pe.5
+|======================================================
+
+
+Notes for table 3:
+
+  Table option:
+    -O mpi_callers
+  Options implied by table option:  
+    -d Mm,Mc@,Mb1..7 -b fu,ca,pe=[mmm]
+
+  Options for related tables not shown by default:
+    -O mpi_sm_callers          -O mpi_coll_callers    
+
+  The Total value for each data item is the sum of the Function values.
+  The Function value for each data item is the sum of the Caller values.
+  The Caller value for each data item is the avg of the PE values.
+    (To specify different aggregations, see:  pat_help report options s1)
+
+  This table shows only lines with MPI Msg Count > 0.
+
+
+Table 3:  MPI Message Stats by Caller
+
+ MPI Msg |   MPI | MsgSz | 256B<= |Function
+   Bytes |   Msg |  <16B |  MsgSz | Caller
+         | Count | Count |   <4KB |  PE[mmm]
+         |       |       |  Count |
+
+  2949.0 |   6.1 |   3.5 |    2.6 |Total
+|-------------------------------------------
+|  2949.0 |   6.1 |   3.5 |    2.6 |MPI_Send
+|         |       |       |        | main
+|||-----------------------------------------
+3|| 17936.0 |  28.0 |  14.0 |   14.0 |pe.0
+3||   792.0 |   3.0 |   2.0 |    1.0 |pe.4
+3||   792.0 |   3.0 |   2.0 |    1.0 |pe.5
+|===========================================
+
+
+Notes for table 5:
+
+  Table option:
+    -O heap_hiwater
+  Options implied by table option:  
+    -d am@,ub,ta,ua,tf,nf,ac,ab -b pe=[mmm]
+
+  The Total value for each data item is the avg of the PE values.
+    (To specify different aggregations, see:  pat_help report options s1)
+
+  This table shows only lines with Tracked Heap HiWater MBytes > 0.
+
+
+Table 5:  Heap Stats during Main Program
+
+ Tracked |  Total | Total | Tracked | Tracked |PE[mmm]
+    Heap | Allocs | Frees | Objects |  MBytes |
+ HiWater |        |       |     Not |     Not |
+  MBytes |        |       |   Freed |   Freed |
+
+   0.000 |      0 |     0 |       0 |   0.000 |Total
+|-----------------------------------------------------
+|   0.000 |      0 |     0 |       0 |   0.000 |pe.6
+|   0.000 |      0 |     0 |       0 |   0.000 |pe.0
+|   0.000 |      0 |     0 |       0 |   0.000 |pe.5
+|=====================================================
+
+
+Notes for table 8:
+
+  Table option:
+    -O write_stats
+  Options implied by table option:  
+    -d wt,wb,wR,wr@,wC -b fi,pe=[mmm],fd
+
+  The Total value for each data item is the sum of the File Name values.
+  The File Name value for each of Write B/Call, Writes, Write Time is the avg 
+    of the PE values.
+  The File Name value for each of Write MB, Write Rate MB/sec is the sum of 
+    the PE values.
+  The PE value for each data item is the sum of the File Desc values.
+    (To specify different aggregations, see:  pat_help report options s1)
+
+  This table shows only lines with Writes > 0.
+
+
+Table 8:  File Output Stats by Filename
+
+ Write | Write MB |Write Rate | Writes |  Write |File Name
+  Time |          |    MB/sec |        | B/Call | PE[mmm]
+       |          |           |        |        |  File Desc
+
+ 0.000 | 0.002301 | 47.878685 |     31 |  77.84 |Total
+|-----------------------------------------------------------
+| 0.000 | 0.002301 | 47.878685 |     31 |  77.84 |stdout
+||----------------------------------------------------------
+|| 0.000 | 0.002301 |  5.984815 |    250 |   9.65 |pe.0
+3|       |          |           |        |        | fd.1
+|| 0.000 |       -- |        -- |     -- |     -- |pe.3
+|| 0.000 |       -- |        -- |     -- |     -- |pe.5
+|===========================================================
+
+
+Notes for table 9:
+
+  Table option:
+    -O program_time
+  Options implied by table option:  
+    -d pt,hm -b pe=[mmm]
+
+  The Total value for each of Process Time, Process HiMem (MBytes) is the avg 
+    of the PE values.
+    (To specify different aggregations, see:  pat_help report options s1)
+
+
+Table 9:  Program Wall Clock Time, Memory High Water Mark
+
+  Process |  Process |PE[mmm]
+     Time |    HiMem |
+          | (MBytes) |
+
+ 0.044831 |       22 |Total
+|----------------------------
+| 0.045435 |   22.258 |pe.7
+| 0.044952 |   22.258 |pe.6
+| 0.043378 |   22.250 |pe.2
+|============================
+
+
+=========  Additional details ============================
+
+Experiment:  trace
+
+Original path to data file:
+  /lustre/scratch/std0026/LAB-EXAMPLE/C/matmul/mpi_mm+pat+26391-16296tdt.xf  (RTS)
+
+Original program:  /lustre/scratch/std0026/LAB-EXAMPLE/C/matmul/mexe
+
+Instrumented with:  pat_build -u -w -g mpi,io,heap,blas,lapack mexe 
+
+Instrumented program:  ./mpi_mm+pat
+
+Program invocation:  ./mpi_mm+pat 
+
+Exit Status:  0  PEs:  0-7
+
+Memory pagesize:  4096
+
+Runtime environment variables:
+  MPICHBASEDIR=/opt/mpt/3.1.0/xt
+  MPICH_DIR=/opt/mpt/3.1.0/xt/mpich2-pgi
+
+Report time environment variables:
+  CRAYPAT_ROOT=/opt/xt-tools/craypat/4.4.0/v23/cpatx
+
+Report command line options:  -o report
+
+Operating system:
+  Linux 2.6.16.54-0.2.12_1.0000.3997.0-cnl #1 SMP Mon Jan 26 13:41:57 PST 2009
+
+Estimated minimum overhead per call of a traced function,
+  which was subtracted from the data shown in this report
+  (for raw data, use the option:  -s overhead=include):
+    Time    0.593  microseconds
+
+Number of traced functions: 119
+  (To see the list, specify:  -s traced_functions=show)
+

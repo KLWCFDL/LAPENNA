@@ -1,0 +1,13 @@
+***---> readme file for the hello2.c <---***
+
+This MPI program is an enhancment on hello1.c.
+
+Hello2 will ceck its rank, and if the process is the master
+then send a "Hello World!" message, in characters, to each 
+of the workers. 
+
+If the process is a worker, then receive the "Hello World!" 
+message and print it out. 
+
+Look over the function calls in hello1.c for help.
+

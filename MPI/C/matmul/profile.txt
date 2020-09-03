@@ -1,0 +1,62 @@
+MPI_init     called at:	Tue Mar 17 11:11:33 2009
+MPI_Finalize called at:	Tue Mar 17 11:11:33 2009
+
+Number of processors:	8
+
+---- Process Stats              min          max          avg imbl ranks
+Wall Clock Time (sec)      0.004860     0.005299     0.005128   8% 2/5
+User CPU Time   (sec)      0.000000     0.008000     0.003500 100% 2/0
+System CPU Time (sec)      0.004000     0.008000     0.005500  50% 0/1
+I/O Read Time              0.000000     0.000000     0.000000   0% 0/0
+I/O Write Time             0.000000     0.000000     0.000000   0% 0/0
+MPI Comm Time   (sec)      0.000040     0.000180     0.000090  78% 2/0
+MPI Sync Time   (sec)      0.000000     0.000000     0.000000   0% 0/0
+MPI Calls                         7           49           12  86% 1/0
+Total MPI Bytes                3320        23592         5898  86% 3/0
+Memory Usage    (MB)       4.101562     4.214844     4.125977   3% 4/0
+
+---- Performance Counters       min          max          avg imbl ranks
+OPS_ADD:OPS_ADD_PIPE_LO    0.000439     0.001749     0.001510  75% 0/2
+OPS_MULTIPLY:OPS_MULTIP    0.003137     0.003362     0.003204   7% 4/2
+OPS_STORE:OPS_STORE_PIP    0.001766     0.004757     0.002174  63% 4/0
+PACKED_SSE_AND_SSE2        0.006054     0.007635     0.006356  21% 3/0
+
+---- Barriers and Waits         min          max          avg imbl ranks
+
+---- Message Routines           min          max          avg imbl ranks
+MPI_Send             size 1-4B
+  Number of Calls                 2           14            3  86% 1/0
+  Total Bytes                     8           56           14  86% 1/0
+  Communication Time       0.000004     0.000062     0.000012  93% 4/0
+MPI_Send             size 513-1024B
+  Number of Calls                 1            7            1  86% 1/0
+  Total Bytes                   784         5880         1435  87% 3/0
+  Communication Time       0.000003     0.000011     0.000005  74% 5/0
+MPI_Send             size 1-2KB
+  Number of Calls                 0            7            0 100% 1/0
+  Total Bytes                     0        12000         1500 100% 1/0
+  Communication Time       0.000000     0.000023     0.000003 100% 1/0
+MPI_Recv             size 1-4B
+  Number of Calls                 2           14            3  86% 1/0
+  Total Bytes                     8           56           14  86% 1/0
+  Communication Time       0.000018     0.000100     0.000044  82% 1/6
+MPI_Recv             size 513-1024B
+  Number of Calls                 1            7            1  86% 1/0
+  Total Bytes                   840         5600         1435  85% 1/0
+  Communication Time       0.000001     0.000025     0.000005  96% 2/0
+MPI_Recv             size 1-2KB
+  Number of Calls                 0            1            0 100% 0/1
+  Total Bytes                     0         1800         1500 100% 0/1
+  Communication Time       0.000000     0.000035     0.000021 100% 0/5
+
+---- MPI2 RMA Calls             min          max          avg imbl ranks
+
+---- Message Totals             min          max          avg imbl ranks
+Blocking send calls               3           28            6  89% 1/0
+Blocking send size              792        17936         2949  96% 3/0
+Blocking send time         0.000008     0.000096     0.000020  92% 5/0
+Blocking comm rate        77.321082   187.136907    99.484819  59% 1/0
+
+---- Number Of Comm Partners    min          max          avg imbl ranks
+MPI_Send                          1            7          1.8  86% 1/0
+MPI_Recv                          1            7          1.8  86% 1/0

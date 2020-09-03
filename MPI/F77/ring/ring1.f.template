@@ -1,0 +1,66 @@
+      PROGRAM ring
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+C
+C This file has been written as a sample solution to an exercise in a 
+C course given at the Edinburgh Parallel Computing Centre. It is made
+C freely available with the understanding that every copy of this file
+C must include this header and that EPCC takes no responsibility for
+C the use of the enclosed teaching material.
+C Authors:    Alan Simpson, Joel Malard
+C Contact:    epcc-tec@epcc.ed.ac.uk
+C
+C NOTE: This file has been altered by Asim YarKhan of the Joint Institute 
+C for Computational Science (jics@cs.utk.edu) for an MPI workshop.
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+      IMPLICIT NONE
+
+      include "mpif.h"
+
+      INTEGER to_right
+      PARAMETER(to_right=201)
+      INTEGER to_left
+      PARAMETER(to_left=102)
+
+      INTEGER ierror, rank, my_rank, size
+      INTEGER right, left
+      INTEGER other, sum
+      INTEGER send_status(MPI_STATUS_SIZE)
+      INTEGER recv_status(MPI_STATUS_SIZE)
+      INTEGER request
+
+      CALL MPI_XXXX(ierror)
+
+      CALL MPI_XXXX_XXXX(XXXXXXXXXXXXXX, my_rank, ierror)
+      CALL MPI_XXXX_XXXX(XXXXXXXXXXXXXX, size, ierror)
+
+      right = my_rank + 1
+      IF (right .EQ. size) right = 0
+
+      left = my_rank - 1
+      IF (left .EQ. -1) left = size-1
+
+      sum = 0
+      rank = my_rank
+ 100  CONTINUE
+
+      CALL MPI_ISSEND(rank, 1, XXXXXXXXXXX, right, to_right,
+     $     XXXXXXXXXXXXXX, request, XXXXXX)
+
+      CALL MPI_XXXX(XXXXX, 1, XXXXXXXXXXX, left, to_right,
+     $     XXXXXXXXXXXXXX, recv_status, ierror)
+
+      CALL MPI_WAIT(XXXXXXX, send_status, ierror)
+
+      sum = sum + other
+      rank = other
+
+      IF(other .NE. my_rank) GOTO 100
+
+      PRINT *, 'Proc ', my_rank, ' Sum = ',sum
+
+      CALL MPI_XXXXXXXX(ierror)
+
+      STOP
+      END

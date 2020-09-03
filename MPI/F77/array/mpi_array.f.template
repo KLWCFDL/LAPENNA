@@ -1,0 +1,185 @@
+C------------------------------------------------------------------------->
+C MPI Example - Array Assignment - Fortran Version
+C FILE: mpi_array.f
+C OTHER FILES: make.mpi_array.f
+C DESCRIPTION:
+C   In this simple example, the master task initiates numtasks-1 number of
+C   worker tasks.  It then distributes an equal portion of an array to each
+C   worker task.  Each worker task receives its portion of the array, and
+C   performs a simple value assignment to each of its elements. The value
+C   assigned to each element is simply that element's index in the array+1.
+C   Each worker task then sends its portion of the array back to the master
+C   task.  As the master receives back each portion of the array, selected
+C   elements are displayed.
+C AUTHOR: Blaise Barney. Converted to MPI: George L. Gusciora (1/23/95)
+C LAST REVISED: 12/14/95 Blaise Barney
+C------------------------------------------------------------------------->
+
+      program array 
+
+C  *-------------------------->
+C *---> Necessary MPI library
+C  *-------------------------->
+
+      include 'XXXXXX'   
+
+      integer   ARRAYSIZE, MASTER
+      parameter (ARRAYSIZE = 600000)
+      parameter (MASTER = 0)
+
+      integer  numtasks, numworkers, taskid, dest, index, i, ierr,
+     &         arraymsg, indexmsg, source, chunksize
+      integer status(MPI_STATUS_SIZE)
+      real*4   data(ARRAYSIZE), result(ARRAYSIZE)
+
+C-------------------------- INITIALIZATIONS ------------------------------>
+C Find out how many tasks are in this partition and what my task id is.
+C Then define the number of worker tasks and the array partition size as
+C chunksize.
+C NOTE:  For this example, the MP_PROCS environment variable should be set
+C to an odd number...to insure even distribution of the array to
+C numtasks-1 worker tasks.
+C------------------------------------------------------------------------->
+
+C  *------------------->
+C *---> Initialize MPI
+C  *------------------->
+
+      call XXXXXX( XXXX )
+
+C  *------------------------------------------>
+C *---> Determine rank in global communicator
+C  *------------------------------------------>
+
+      call MPI_XXXXXXXXX(XXXXXXXXXXXXXX, taskid, XXXX)
+
+C  *---------------------------------------------->
+C *---> Determine size of the global communicator
+C  *---------------------------------------------->
+
+      call MPI_XXXXXXXXX(MPI_COMM_WORLD, XXXXXXXX, ierr)
+
+      numworkers = numtasks-1
+      chunksize = (ARRAYSIZE / numworkers)
+      arraymsg = 1
+      indexmsg = 2
+
+C  *=-=-=-=-=-=-=-=-=-=-=->
+C ***-=-=-=-> MASTER TASK
+C  *=-=-=-=-=-=-=-=-=-=-=->
+
+      if (taskid .eq. MASTER) then
+
+C  *------------------------->
+C *---> Initialize the array
+C  *------------------------->
+
+      do 20 i=1, ARRAYSIZE 
+        data(i) =  0.0
+ 20   continue
+
+C  *--------------------------------------------------->
+C *---> Send each worker task its portion of the array
+C  *--------------------------------------------------->
+
+      index = 1
+      do 30 dest=1, numworkers
+        write(*,*) 'Sending to worker task', dest
+
+C  *--------------------------------------------------------------------->
+C *--->Send index so each process knows where to start in the data array
+C  *--------------------------------------------------------------------->
+
+        call MPI_XXXX(XXXXX, 1, XXXXXXXXXXX, dest, XXXXXXXX, 
+     &                MPI_COMM_WORLD, XXXX)
+
+C  *-------------------------------------------------------------->
+C *--->Send chunksize bit of data starting at the index position.
+C  *-------------------------------------------------------------->
+
+        call MPI_XXXX(XXXX(index), XXXXXXXXX, MPI_REAL, XXXX, arraymsg,
+     &                XXXXXXXXXXXXXX, ierr)
+        index = index + chunksize
+ 30   continue
+
+C  *------------------------------------------------------------------->
+C *---> Wait to get back the results from workers & print a few values
+C  *------------------------------------------------------------------->
+
+      do 40 i=1, numworkers
+        source = i
+
+C  *------------------------------------------------------------------------->
+C *---> Receive the index position of the chunk this process was working on.
+C  *------------------------------------------------------------------------->
+
+        call MPI_XXXX(index, 1, XXXXXXXXXXX, XXXXXX, indexmsg,
+     &                MPI_COMM_WORLD, XXXXXX, ierr)
+
+C  *--------------------------------------------------------->
+C *---> Receive chunksize bit of data for the results array.
+C  *--------------------------------------------------------->
+
+        call MPI_XXXX(XXXXXX(index), XXXXXXXXX, MPI_REAL, source,
+     &                arraymsg, XXXXXXXXXXXXXX, status, XXXX)
+        print *, '---------------------------------------------------'
+        print *, 'MASTER: Sample results from worker task ', source
+        print *, '   result[', index, ']=', result(index)
+        print *, '   result[', index+100, ']=', result(index+100)
+        print *, '   result[', index+1000, ']=', result(index+1000)
+        print *, ' '
+ 40   continue
+
+      print *, 'MASTER: All Done!' 
+      endif
+
+C  *=-=-=-=-=-=-=-=-=-=-=-=>
+C ***-=-=-=-> WORKER TASKS
+C  *=-=-=-=-=-=-=-=-=-=-=-=>
+
+      if (taskid .gt. MASTER) then
+ 
+C  *---------------------------------------------------------->
+C *---> Receive the starting position of the data to work on.
+C  *---------------------------------------------------------->
+
+        call MPI_XXXX(XXXXX, X, MPI_INTEGER, XXXXXX, indexmsg,
+     &                XXXXXXXXXXXXXX, status, XXXX)
+
+C  *-------------------------------------------------------------->
+C *---> Receive chunksize bit of data starting at index position.
+C  *-------------------------------------------------------------->
+
+        call MPI_XXXX(XXXXXX(index), XXXXXXXXX, XXXXXXXX, MASTER,
+     &                arraymsg, MPI_COMM_WORLD, XXXXXX, ierr)
+
+C  *-------------------------------------------------------------->
+C *---> Do a simple value assignment to each of my array elements
+C  *-------------------------------------------------------------->
+
+        do 50 i=index, index + chunksize
+          result(i) = i + 1
+ 50     continue
+
+C  *--------------------------------------------------------------->
+C *---> Send index position of the data working on back to master.
+C  *--------------------------------------------------------------->
+
+        call MPI_XXXX(XXXXX, X, MPI_INTEGER, XXXXXX, indexmsg,
+     &                MPI_COMM_WORLD, XXXX)
+
+C  *------------------------------------------------------------------->
+C *---> Send chunksize bit of result back to master starting at index.
+C  *------------------------------------------------------------------->
+
+        call MPI_XXXX(result(XXXXX), chunksize, XXXXXXXX, XXXXXX,
+     &                arraymsg, XXXXXXXXXXXXXX, ierr)
+
+      endif
+
+C  *----------------->
+C *---> Finalize MPI
+C  *----------------->
+
+      call XXXXXXXXXXXX(XXXX)   
+      end

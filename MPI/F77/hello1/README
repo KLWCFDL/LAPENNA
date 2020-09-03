@@ -1,0 +1,12 @@
+***---> readme file for the hello1.f <---***
+
+This is a basic introduction to MPI. The provided
+program is 99% complete less one line of code for
+a print out.
+
+Review all the MPI function calls and understand
+what they are doing. Your goal should be to take
+the knowledge learned with this simple program
+and code the other programs included in this lab
+knowing what MPI function is needed.
+

@@ -1,0 +1,13 @@
+
+/************************************************************************
+ * Write an MPI program to time the sending and receieving of a message
+ * using the appropriate MPI calls.
+ ************************************************************************/
+
+#include	<stdio.h>
+#include	<mpi.h>
+
+void main(int argc, char *argv[])
+{
+
+}/* End Main */

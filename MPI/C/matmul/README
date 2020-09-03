@@ -1,0 +1,14 @@
+***---> readme file for the matmul.c file/exercise <---***
+
+  In this code the equation [M] = [C] + [A]*[B] is solved.
+The major kernel in this code and the focus of the
+exercise is the matrix-matrix multiplication.  In the
+parallel version of the code this is carried out in a
+distributed manner.  The master distributes the system
+among the workers who perform the actual multiplication in
+smaller blocks and then send back their respective results
+to the master.
+NOTE:  The C and F77 versions of the code differ slightly
+due to the way matrices are stored.  In C matrices are
+stored in row-major order while F77 arrays are stored in
+column-major order.
