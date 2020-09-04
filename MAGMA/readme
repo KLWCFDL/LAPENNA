@@ -1,0 +1,25 @@
+CONTENTS
+===============================================================================
+DIRECTORY STRUCTURE........Listing of what's in this directory
+INTRODUCTION...............Introduction to this example
+BUILDING...................Instructions on how to build this example
+RUNNING....................How to run this example after building
+TODO.......................List of work that still needs to be done
+
+DIRECTORY STRUCTURE
+===============================================================================
+DRIVER       - Contains the openDIEL driver and workflow.cfg files
+MAGMA-MODULE - Contains MAGMA library and associated files
+
+INTRODUCTION
+===============================================================================
+This example simply calls some example MAGMA executable as automatic modules
+
+RUNNING
+===============================================================================
+
+TODO
+===============================================================================
+Expand readme[]
+Add driver code[]
+Test MAGMA automatic compilation[]

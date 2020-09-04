@@ -1,0 +1,1 @@
+Both functions multiply two matrices using mpi and output the results.
