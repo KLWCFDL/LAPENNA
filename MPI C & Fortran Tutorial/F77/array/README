@@ -1,8 +1,0 @@
-***---> readme file for the array.f file/exercise <---***
-
-This code performs a simple manipulation on an array of numbers.
-The master process initializes an array of numbers and then
-distributes it in chunks to the worker processes.  The worker
-processes add 1 to all entries of their chunk of the array and
-then send it back to the master.  The master displays a few 
-entries of the updated matrix.

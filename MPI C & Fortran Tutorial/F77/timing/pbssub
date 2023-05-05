@@ -1,9 +1,0 @@
-#PBS -N test
-#PBS -A UT-TENN0007
-#PBS -j oe
-#PBS -q batch
-#PBS -l walltime=1:00,size=8
-cd $PBS_O_WORKDIR
-date
-aprun -n 2 ./mpi_timing
-
