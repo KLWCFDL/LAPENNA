@@ -1,4 +1,0 @@
-BACKGROUND
-Left
-Right
-U-turn
